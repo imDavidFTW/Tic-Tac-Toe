@@ -7,11 +7,10 @@ image2 = pygame.image.load(r'C:\Users\xdryn\GitHub Projects\Tic-Tac-Toe\images\S
 image3 = pygame.image.load(r'C:\Users\xdryn\GitHub Projects\Tic-Tac-Toe\images\Screenshot 2022-08-06 001026.png')
 player1 = pygame.image.load(r'C:\Users\xdryn\GitHub Projects\Tic-Tac-Toe\images\Screenshot 2022-08-06 004824.png')
 player2 = pygame.image.load(r'C:\Users\xdryn\GitHub Projects\Tic-Tac-Toe\images\Screenshot 2022-08-06 004740.png')
-
+catImage = pygame.image.load(r'C:\Users\xdryn\GitHub Projects\Tic-Tac-Toe\images\cat.png')
 
 def hasSameHorizontal(lst):
     for i in range(len(lst) - 1):
-        print(lst)
         if lst[i] != lst[i + 1] or lst[i] == 0 or lst[i + 1] == 0:
             return False
     return True
@@ -22,7 +21,6 @@ def hasSameColumn(matrix):
         for j in range(2):
             if matrix[j][k] == matrix[j+1][k] and matrix[j][k] != 0:
                 count += 1
-            print(count)
             if count == 3:
                 if k == 0:
                     return 0
@@ -53,61 +51,60 @@ def winner(matrix):
     for i in range(3):
         if hasSameHorizontal(matrix[i]):
             if matrix[i][0] == 1:
-                Window.blit(player1, (0, 0))
+                Window.blit(player1, (160, 250))
                 pygame.display.update()
                 return True, print("Winner, Player 1")
             elif matrix[i][0] != 0:
-                Window.blit(player2, (0, 0))
+                Window.blit(player2, (160, 250))
                 pygame.display.update()
                 return True, print("Winner, Player 2")
     if hasSameColumn(matrix) >= 0:
         if hasSameColumn(matrix) == 0:
             if matrix[0][0] == 1:
-                Window.blit(player1, (0, 0))
+                Window.blit(player1, (160, 250))
                 pygame.display.update()
                 return True, print("Winner, Player 1")
             else:
-                Window.blit(player2, (0, 0))
+                Window.blit(player2, (160, 250))
                 pygame.display.update()
                 return True, print("Winner, Player 2")
         if hasSameColumn(matrix) == 1:
             if matrix[0][1] == 1:
-                Window.blit(player1, (0, 0))
+                Window.blit(player1, (160, 250))
                 pygame.display.update()
                 return True, print("Winner, Player 1")
             else:
-                Window.blit(player2, (0, 0))
+                Window.blit(player2, (160, 250))
                 pygame.display.update()
                 return True, print("Winner, Player 2")
         if hasSameColumn(matrix) == 2:
             if matrix[0][2] == 1:
-                Window.blit(player1, (0, 0))
+                Window.blit(player1, (160, 250))
                 pygame.display.update()
                 return True, print("Winner, Player 1")
             else:
-                Window.blit(player2, (0, 0))
+                Window.blit(player2, (160, 250))
                 pygame.display.update()
                 return True, print("Winner, Player 2")
     if hasSameLeftToRightDiagonal(matrix):
         if matrix[0][0] == 1:
-            Window.blit(player1, (0, 0))
+            Window.blit(player1, (160, 250))
             pygame.display.update()
             return True, print("Winner, Player 1")
         elif matrix[0][0] != 0:
-            Window.blit(player2, (0, 0))
+            Window.blit(player2, (160, 250))
             pygame.display.update()
             return True, print("Winner, Player 2")
-    print(hasSameRightToLeftDiagonal(matrix))
     if hasSameRightToLeftDiagonal(matrix):
         if matrix[0][2] == 1:
-            Window.blit(player1, (0, 0))
+            Window.blit(player1, (160, 250))
             pygame.display.update()
             return True, print("Winner, Player 1")
         elif matrix[0][2] != 0:
-            Window.blit(player2, (0, 0))
+            Window.blit(player2, (160, 250))
             pygame.display.update()
             return True, print("Winner, Player 2")
-    return False, print("No Winner")
+    return False
 
 
 
@@ -172,11 +169,14 @@ def main():
                                 matrix[2][1] = 2
                             else:
                                 matrix[2][2] = 2
-                        if winner(matrix) == True:
+                        if winner(matrix):
                             if count <= 9:
                                 count = 10
                                 winner(matrix)
-            
+            elif count == 9:
+                if winner(matrix) == False:
+                    Window.blit(catImage, (108, 120))
+                    pygame.display.update()
 
 
 
@@ -184,3 +184,5 @@ def main():
 if __name__ == "__main__":
     main()                                     
     pygame.quit()
+
+

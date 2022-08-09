@@ -118,8 +118,6 @@ def main():
     pygame.display.update()
     while run:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
             if count <= 8:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                 # Set the x, y postions of the mouse click
@@ -177,6 +175,11 @@ def main():
                 if winner(matrix) == False:
                     Window.blit(catImage, (108, 120))
                     pygame.display.update()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    main()
+                if event.key == pygame.K_ESCAPE:
+                    run = False
 
 
 
